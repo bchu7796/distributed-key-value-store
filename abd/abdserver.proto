@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+option java_package = "ex.grpc";
+
+package abdserver;
+
+// Declare the service
+service ABDServer {
+    // Function invoked to send the request
+    rpc client_gettime (TimeRequest) returns (TimeReply) {}
+    rpc client_read (ClientReadRequest) returns (ClientReadReply) {}
+    rpc client_write (ClientWriteRequest) returns (ClientWriteReply) {}
+    rpc client_delete (ClientDeleteRequest) returns (ClientDeleteReply) {}
+}
+
+// shoud be empty
+message TimeRequest {
+
+}
+
+// The response message containing lamport clock
+message TimeReply {
+    int32 id = 1;
+    int32 time = 2;
+}
+
+// The read request message contains key value
+message ClientReadRequest {
+    string key = 1;
+}
+
+// The response message containing lamport clock and kv-pair
+message ClientReadReply {
+    // time
+    int32 id = 1;
+    int32 time = 2;
+    // value
+    string key = 3;
+    string value = 4;
+}
+
+message ClientWriteRequest {
+    // time
+    int32 id = 1;
+    int32 time = 2;
+    // value
+    string key = 3;
+    string value = 4;
+}
+
+// The response message containing ack
+message ClientWriteReply {
+    int32 ack = 1;
+}
+
+message ClientDeleteRequest {
+    // time
+    int32 id = 1;
+    int32 time = 2;
+    // value
+    string key = 3;
+    string value = 4;
+}
+
+// The response message containing ack
+message ClientDeleteReply {
+    int32 ack = 1;
+}
