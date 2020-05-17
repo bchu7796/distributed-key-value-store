@@ -1,4 +1,4 @@
-# OS_P2
+# Distributed KV Store
 
 ### ABD
 To run abd protocol, first move to the abd directory.
